@@ -9,4 +9,4 @@ from .config import Config
 from .kube import HomelabMCPError, KubeClient
 
 __all__ = ["Config", "KubeClient", "HomelabMCPError", "__version__"]
-__version__ = "0.1.0"
+__version__ = "0.1.1"

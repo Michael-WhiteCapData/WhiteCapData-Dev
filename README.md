@@ -1,3 +1,5 @@
+<!-- mcp-name: io.github.Michael-WhiteCapData/WhiteCapData-Dev -->
+
 # WhiteCapData-Dev
 
 **Operate a k3s / Kubernetes cluster straight from your AI agent — safe by default.**

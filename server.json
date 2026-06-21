@@ -6,12 +6,12 @@
     "url": "https://github.com/Michael-WhiteCapData/WhiteCapData-Dev",
     "source": "github"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "whitecapdata-dev",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         {
