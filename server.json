@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.Michael-WhiteCapData/homelab-mcp",
+  "description": "Operate a k3s / Kubernetes cluster from an MCP client — health, logs, and guarded restart/scale/delete, safe by default.",
+  "repository": {
+    "url": "https://github.com/Michael-WhiteCapData/homelab-mcp",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "homelab-mcp",
+      "version": "0.1.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "HOMELAB_MCP_CONTEXT",
+          "description": "kubeconfig context to use (defaults to current-context).",
+          "isRequired": false
+        },
+        {
+          "name": "HOMELAB_MCP_READONLY",
+          "description": "Set to 1/true to disable all mutating tools.",
+          "default": "0",
+          "isRequired": false
+        },
+        {
+          "name": "HOMELAB_MCP_MUTABLE_NAMESPACES",
+          "description": "Comma-separated namespaces mutations may touch; '*' allows all.",
+          "default": "default,apps,monitoring,ci",
+          "isRequired": false
+        },
+        {
+          "name": "HOMELAB_MCP_MAX_REPLICAS",
+          "description": "Upper bound accepted by scale_deployment.",
+          "default": "10",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}
