@@ -1,15 +1,18 @@
-# homelab-mcp
+# WhiteCapData-Dev
 
 **Operate a k3s / Kubernetes cluster straight from your AI agent — safe by default.**
 
-[![CI](https://github.com/Michael-WhiteCapData/homelab-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Michael-WhiteCapData/homelab-mcp/actions/workflows/ci.yml)
+[![CI](https://github.com/Michael-WhiteCapData/WhiteCapData-Dev/actions/workflows/ci.yml/badge.svg)](https://github.com/Michael-WhiteCapData/WhiteCapData-Dev/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/whitecapdata-dev?color=3775A9&logo=pypi&logoColor=white)](https://pypi.org/project/whitecapdata-dev/)
 [![Python](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![MCP](https://img.shields.io/badge/MCP-server-D97757)](https://modelcontextprotocol.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-An [MCP](https://modelcontextprotocol.io/) server that lets an agent (Claude Code, Claude Desktop, Cursor, …) inspect and operate a Kubernetes cluster — your homelab k3s box, a dev cluster, whatever your kubeconfig points at — **without shelling out to `kubectl`**. It talks to the Kubernetes API directly using your existing kubeconfig (or in-cluster service account).
+An [MCP](https://modelcontextprotocol.io/) server that lets an agent (Claude Code, Claude Desktop, Cursor, …) inspect and operate a **Kubernetes / k3s** cluster — your homelab box, a dev cluster, whatever your kubeconfig points at — **without shelling out to `kubectl`**. It talks to the Kubernetes API directly using your existing kubeconfig (or an in-cluster service account).
 
 The design goal is **safe by default**: reads are always on; every mutating action (restart / scale / delete) is gated *before the API call* by a read-only switch and a namespace allowlist, so an over-eager agent can't touch `kube-system` or nuke a deployment you didn't sandbox.
+
+> **Name note:** the PyPI package is `whitecapdata-dev` (the `homelab-k8s`-style name was taken); the import package and tools are k8s/homelab-focused as described here.
 
 ---
 
@@ -29,15 +32,15 @@ The design goal is **safe by default**: reads are always on; every mutating acti
 ## Install
 
 ```bash
-uvx --from git+https://github.com/Michael-WhiteCapData/homelab-mcp homelab-mcp
+uvx whitecapdata-dev          # run directly
+# or
+pip install whitecapdata-dev  # then run: whitecapdata-dev
 ```
-
-> 📦 A PyPI release is on the way; once published, `uvx homelab-mcp` / `pip install homelab-mcp` will work directly.
 
 ### Claude Code
 
 ```bash
-claude mcp add homelab -- uvx --from git+https://github.com/Michael-WhiteCapData/homelab-mcp homelab-mcp
+claude mcp add homelab -- uvx whitecapdata-dev
 ```
 
 ### Claude Desktop / Cursor
@@ -47,7 +50,7 @@ claude mcp add homelab -- uvx --from git+https://github.com/Michael-WhiteCapData
   "mcpServers": {
     "homelab": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/Michael-WhiteCapData/homelab-mcp", "homelab-mcp"],
+      "args": ["whitecapdata-dev"],
       "env": {
         "HOMELAB_MCP_MUTABLE_NAMESPACES": "default,apps,monitoring",
         "HOMELAB_MCP_READONLY": "0"
@@ -92,8 +95,8 @@ The cluster's own RBAC still applies on top — this server can only do what the
 ## Development
 
 ```bash
-git clone https://github.com/Michael-WhiteCapData/homelab-mcp
-cd homelab-mcp
+git clone https://github.com/Michael-WhiteCapData/WhiteCapData-Dev
+cd WhiteCapData-Dev
 uv pip install -e ".[dev]"
 ruff check .
 pytest          # no cluster required — APIs are faked/mocked

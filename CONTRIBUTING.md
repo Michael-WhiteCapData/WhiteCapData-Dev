@@ -1,12 +1,12 @@
-# Contributing to homelab-mcp
+# Contributing to WhiteCapData-Dev
 
 Thanks for your interest! This server stays small, focused, and **safe by default** — contributions that preserve those properties merge easiest.
 
 ## Getting set up
 
 ```bash
-git clone https://github.com/Michael-WhiteCapData/homelab-mcp
-cd homelab-mcp
+git clone https://github.com/Michael-WhiteCapData/WhiteCapData-Dev
+cd WhiteCapData-Dev
 uv pip install -e ".[dev]"
 ```
 
