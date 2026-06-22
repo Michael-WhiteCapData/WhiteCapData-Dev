@@ -62,6 +62,19 @@ claude mcp add homelab -- uvx whitecapdata-dev
 }
 ```
 
+## Run with Docker
+
+A [`Dockerfile`](Dockerfile) is included. The server speaks MCP over stdio and reaches
+your cluster through a mounted kubeconfig. Run interactively (`-i`), starting read-only:
+
+```bash
+docker build -t whitecapdata-dev .
+docker run --rm -i \
+  -v "$HOME/.kube/config:/home/app/.kube/config:ro" \
+  -e HOMELAB_MCP_READONLY=1 \
+  whitecapdata-dev
+```
+
 ## Tools
 
 | Tool | Kind | Description |
